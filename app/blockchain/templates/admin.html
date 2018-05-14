@@ -1,0 +1,640 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ADMIN DASHBOARD</title>
+  <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="apple-icon.png">
+  <link rel="shortcut icon" href="../static/homepage/images/Walletz.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/themify-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flag-icon.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/cs-skin-elastic.css') }}">
+  <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/scss/style.css') }}">
+  <link href="{{ url_for('static', filename='assets/css/lib/vector-map/jqvmap.min.css') }}" rel="stylesheet">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href=" {{ url_for('static', filename='css/background.css')}}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+  
+  <style type="text/css">
+  canvas{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:-1;
+    width: 100%;
+    height:500;
+  }
+ </style>
+</head>
+<body style="background-color:black;">
+  <div id="parent">
+    <canvas id="canvas" height="500"></canvas>
+
+   <!-- Top Panel -->
+
+    <div id="right-panel" class="right-panel">
+      <!-- Header-->
+      <header id="header" class="header">
+        <div class="header-menu">
+          <div class="col-sm-7">
+
+            <div class="header-left">  
+              <img class="img-responsive" src="{{ url_for('static', filename='images/adminlogo.png') }}" alt="Logo" id='swoosh'>             
+              <div class="form-inline">                           
+              </div>
+              <div class="dropdown for-notification">
+                <div class="dropdown-menu" aria-labelledby="notification">
+                </div>
+              </div>
+
+              <div class="dropdown for-message">
+                <div class="dropdown-menu" aria-labelledby="message">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-5">
+            <div class="float-left" align="left">
+
+            </div>
+            <div class="user-area dropdown float-right">
+
+              <a href="{{url_for('signout')}}"> <button type="button" class="btn btn-outline-success" ><i class="fa fa-power-off"></i>&nbsp; Sign Out</button></a>
+            </div>
+
+            <div class="language-select dropdown" id="language-select">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
+                <i class="flag-icon flag-icon-in"></i>
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+
+      </header><!-- /header -->
+      <!-- Header-->
+
+      <div class="breadcrumbs">
+        <div class="col-sm-12">
+          <div class="page-header float-center" >
+            <div class="page-title" align="center">
+              <h1>Admin Dashboard</h1>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+
+            <div class="custom-tab">
+              <center>
+                <nav>
+                  <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" data-link="#custom-nav-home" role="tab" aria-controls="custom-nav-home" aria-selected="true">Home</a>
+                    <a class="nav-item nav-link" id="custom-nav-profile-tab" onclick="resize()" data-toggle="tab" href="#custom-nav-profile" data-link="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile" aria-selected="false">User Details</a>
+                    <a class="nav-item nav-link" id="custom-nav-trans-tab" data-toggle="tab" href="#custom-nav-trans" data-link="#custom-nav-trans" role="tab" aria-controls="custom-nav-trans" aria-selected="false">Transaction History</a>
+                    <a class="nav-item nav-link" id="custom-nav-purchase-history-tab" data-toggle="tab" href="#custom-nav-purchase-history" data-link="" role="tab" aria-controls="custom-nav-purchase-history" aria-selected="false">Purchase History</a>
+                    <a class="nav-item nav-link" id="custom-nav-sale-tab" data-toggle="tab" href="#custom-nav-sale" data-link="" role="tab" aria-controls="custom-nav-sale" aria-selected="false">Sale History</a>
+                    <a class="nav-item nav-link" id="custom-nav-stat-tab" data-toggle="tab" href="#custom-nav-stat" data-link="" role="tab" aria-controls="custom-nav-stat" aria-selected="false">Distributed Ledger</a>
+                    <a class="nav-item nav-link" id="custom-nav-mine-tab" data-toggle="tab" href="#custom-nav-mine" data-link="" role="tab" aria-controls="custom-nav-mine" aria-selected="false">Mine</a>
+
+
+                    <a class="nav-item nav-link" id="custom-nav-converter-tab" data-toggle="tab" href="#custom-nav-converter" data-link="" role="tab" aria-controls="custom-nav-converter" aria-selected="false">Converter</a>
+
+                  </div>
+                </nav>
+              </center>
+              <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                  <div class="row">
+                    <div class="col"></div>
+                    <div class="col-md-8">
+                      <div class="feed-box text-center">
+                        <section class="card">
+                          <div class="card-body">
+
+                            <a href="#">
+                              <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                            </a>
+                            <h2>{{firstname}} {{lastname}}</h2>
+                            <p>{{ session['email'] }}</p>
+                            <p>Mobile Number:{{ phone }}</p>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                  {%if mine %}
+                  <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                    <span class="badge badge-pill badge-success">Success</span>
+                    {{cnz}} Coinz mined successfully.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {% endif%}
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="stat-widget-one">
+                          <div class="stat-icon dib"><i class="fa fa-money text-success border-success"></i></div>
+                          <div class="stat-content dib">
+                            <div class="stat-text">Mined</div>
+                            <div class="stat-digit count">{{ mined }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="stat-widget-one">
+                          <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                          <div class="stat-content dib">
+                            <div class="stat-text">Users</div>
+                            <div class="stat-digit count">{{ users }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="stat-widget-one">
+                          <div class="stat-icon dib"><i class="fa fa-inr text-warning border-warning"></i></div>
+                          <div class="stat-content dib">
+                            <div class="stat-text">Exchange Rate in ₹</div>
+                            <div class="stat-digit count">10</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="stat-widget-one">
+                          <div class="stat-icon dib"><i class="ti-link text-danger border-danger"></i></div>
+                          <div class="stat-content dib">
+                            <div class="stat-text">Transactions</div>
+                            <div class="stat-digit count">{{trans}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+
+
+
+
+
+
+
+
+
+                  <div class="col-md-12">
+                    <div class="card">
+
+                      <div class="card-body">
+                        <table id="user" width="100%" cellspacing="0" class="display" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>User Name</th>
+                              <th>Email ID</th>
+                              <th>Balance</th>
+                              <th>Hash</th>
+                              <th>Phone Number</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {%for t in user_h%}
+                            <tr>
+                              <td>{{t.firstname}} {{t.lastname}}</td>
+                              <td>{{t.email}}</td>
+                              <td>{{t.balance}}</td>
+                              <td>{{t.hash}}</td>
+                              <td>{{t.phone}}</td>
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-trans" role="tabpanel" aria-labelledby="custom-nav-trans-tab">
+                  <div class="col-lg-12">
+                    <div class="card">
+
+                      <div class="card-body">
+                        <table id="example" width="100%" cellspacing="0" class="display" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Sender Email</th>
+                              <th>Receiver Email</th>
+                              <th>Amount in Coinz</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {%for u in trans_h%}
+                            <tr>
+                              <td>{{u.date[0:10]}} </td>
+                              <td>{{u.date[10:19]}} </td>
+                              <td>{{u.sender_email}}</td>
+                              <td>{{u.receiver_email}}</td>
+                              <td>{{u.coinz}}</td>
+
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-stat" role="tabpanel" aria-labelledby="custom-nav-stat-tab">
+                  <div align="center"><h2>THE ENTIRE BLOCKCHAIN</h2></div>
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="chain" allowfullscreen></iframe>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="custom-nav-mine" role="tabpanel" aria-labelledby="custom-nav-mine-tab">
+
+
+
+
+
+
+                  <br>
+                  <p><b>Mine coinz</b></p><hr>
+                  <div align="center">
+                    Your Balance is <b>{{admin_bal}}</b><br><br>
+                    {% for message in form.mine.errors %}
+                    <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                    <form action="{{ url_for('admin') }}" method="post" name="Form" onsubmit="return ck()">
+                      <div class="col-12"><input type="number" step="any" placeholder="Enter Amount" class="form-control" id="mine" name="mine"></div><br><br>
+                      <button class="btn btn-secondary btn-lg btn-block" type="submit" >MINE</button></div><br><br>
+                    <!--<p><b>Gift coinz</b></p><hr>
+                    <div class="col-12"><input type="text" placeholder="Enter Recipient" class="form-control" id="gift"></div><br><br>
+                    <button class="btn btn-secondary btn-lg btn-block" type="submit">GIFT</button><br><br>-->
+                  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-contact" role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                  serach
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-balance" role="tabpanel" aria-labelledby="custom-nav-balance-tab">
+                  <p><div align="center">View Balance Gift Coinz Balance={{admin_bal}}</div></p>
+                </div>
+                <div class="tab-pane fade" id="custom-nav-converter" role="tabpanel" aria-labelledby="custom-nav-converter-tab">
+
+
+
+
+
+
+
+                  <center>
+                    <div class="card">
+                      <div class="card-header">
+                        <h2>Convert</h2>
+                      </div>
+                      <div class="card-body">
+
+                        <br><br>
+                        <input type="number" step="any" name="coinz" id="coinz" onchange="c2i()" class="form-control col-sm-8" placeholder="Coinz">
+                        <br><br>
+                        <input type="number" step="any" name="inr" id="inr" onchange="i2c()" class="form-control col-sm-8" placeholder="INR"><br><br><br>
+                        <div class="card-footer">
+                          <button class="btn-outline-success" onclick="a()"><b><strong>CONVERT</strong></b></button>
+
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-sale" role="tabpanel" aria-labelledby="custom-nav-sale-tab">
+
+
+
+                  <div class="col-lg-12">
+                    <div class="card">
+
+                      <div class="card-body">
+                        <table id="sale" class="display" width="100%" cellspacing="0" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Email</th>
+                              <th>Amount in Coinz</th>
+                              <th>Amount in ₹</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {%for u in sell_h%}
+                            <tr>
+                              <td>{{u.date[0:10]}} </td>
+                              <td>{{u.date[10:19]}} </td>
+                              <td>{{u.email}}</td>
+                              <td>{{u.coinz}}</td>
+                              <td>{{u.inr}}</td>
+
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="tab-pane fade" id="custom-nav-purchase-history" role="tabpanel" aria-labelledby="custom-nav-purchase-history">
+                  <div class="col-lg-12">
+                    <div class="card">
+
+                      <div class="card-body">
+                        <table id="buy" class="display" width="100%" cellspacing="0" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Email</th>
+                              <th>Amount in Coinz</th>
+                              <th>Amount in ₹</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {%for u in buy_h%}
+                            <tr>
+                              <td>{{u.date[0:10]}} </td>
+                              <td>{{u.date[10:19]}} </td>
+                              <td>{{u.email}}</td>
+                              <td>{{u.coinz}}</td>
+                              <td>{{u.inr}}</td>
+
+                            </tr>
+                            {%endfor%}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+    <!--total transactions-->
+    <script src="{{ url_for('static', filename='assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+
+    <script src="{{ url_for('static', filename='assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/widgets.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/lib/vector-map/jquery.vmap.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/lib/vector-map/country/jquery.vmap.world.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jbwaad.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jreejo.js')}}"></script>
+    <script src='https://cdn.jsdelivr.net/quicksettings/3.0/quicksettings.min.js'></script>
+    <script  src="{{ url_for('static', filename='js/background.js')}}"></script>
+    <script>
+      ( function ( $ ) {
+        "use strict";
+
+        jQuery( '#vmap' ).vectorMap( {
+          map: 'world_en',
+          backgroundColor: null,
+          color: '#ffffff',
+          hoverOpacity: 0.7,
+          selectedColor: '#1de9b6',
+          enableZoom: true,
+          showTooltip: true,
+          values: sample_data,
+          scaleColors: [ '#1de9b6', '#03a9f5' ],
+          normalizeFunction: 'polynomial'
+        } );
+      } )( jQuery );
+    </script>
+    <script>
+        /*$(document).ready( function(){
+    //Get the canvas &
+    context var c = $('#canvas');
+    //var ct = c.get(0).getContext('2d');
+    var container = $(c).parent();
+
+    //Run function when browser resizes
+    $(window).resize( respondCanvas );
+
+    function respondCanvas(){
+        c.attr('width', $(container).width() ); //max width
+        c.attr('height', $(container).height() ); //max height
+
+        //Call a function to redraw other content (texts, images etc)
+      }
+
+    //Initial call
+    respondCanvas();
+
+  }
+
+  function resize(){
+    var canvas = document.querySelector('canvas');
+fitToContainer(canvas);
+
+function fitToContainer(canvas){
+  // Make it visually fill the positioned parent
+  canvas.style.width ='100%';
+  canvas.style.height=200;
+  // ...then set the internal size to match
+  canvas.width  = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+}*/
+
+</script>
+
+
+<script type="text/javascript">
+  function a()
+  {
+    var c=document.getElementById("coinz").value;
+    var i=document.getElementById("inr").value;
+
+    if (c=="" && i=="")
+    {
+      window.alert("Field is blank");
+      return false;
+    }
+            //document.getElementById("inr").value=document.getElementById("inr").value
+            //document.getElementById("coinz").value=document.getElementById("coinz").value
+          }
+          function c2i()
+          {
+            document.getElementById("inr").value=document.getElementById("coinz").value*10
+          }
+          function i2c()
+          {
+            document.getElementById("coinz").value=document.getElementById("inr").value/10
+          }
+
+
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#example').DataTable( {
+              "pagingType": "full_numbers"
+            } );
+          } );
+          $(document).ready(function() {
+            $('#sale').DataTable( {
+              "pagingType": "full_numbers"
+            } );
+          } );
+          $(document).ready(function() {
+            $('#buy').DataTable( {
+              "pagingType": "full_numbers"
+            } );
+          } );
+          $(document).ready(function() {
+            $('#user').DataTable( {
+              "pagingType": "full_numbers"
+            } );
+          } );
+        </script>
+        <script type="text/javascript">
+          function ck()
+          {
+            var c=document.forms["Form"]["mine"].value;
+            if (c==null ||c=="")
+            {
+              window.alert("Field is blank");
+              return false;
+            }
+          }
+
+        </script>
+
+      </body>
+      </html>

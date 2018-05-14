@@ -1,0 +1,342 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WELCOME</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="../static/homepage/images/Walletz.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/cs-skin-elastic.css') }}">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/scss/style.css') }}">
+    <link href="{{ url_for('static', filename='assets/css/lib/vector-map/jqvmap.min.css') }}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+</head>
+<body>
+
+
+    <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="./"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="{{ url_for('static', filename='images/logo3.png') }}" alt="Logo"></a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active" >
+                        <a href="{{ url_for('profile') }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    </li>
+                    <h3 class="menu-title">Transactions</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>Payments</a>
+                        <ul class="sub-menu children dropdown-menu">
+
+                            <li><i class="fa fa-money"></i><a href="{{ url_for('pay') }}">Pay</a></li>
+                            <li><i class="fa fa-clock-o"></i><a href="{{ url_for('payhistory') }}">Payments History</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-shopping-cart"></i>Purchase</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="ti-shopping-cart"></i><a href="{{ url_for('buy') }}">Buy</a></li>
+                            <li><i class="fa fa-clock-o"></i><a href="{{ url_for('buyhistory') }}">Purchase History</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-trash"></i>Dispose</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon ti-trash"></i><a href="{{ url_for('sell') }}">Sell</a></li>
+                            <li><i class="fa fa-clock-o"></i><a href="{{ url_for('sellhistory') }}">Sale History</a></li>
+                        </ul>
+                    </li>
+
+
+                    <h3 class="menu-title">Widgets</h3><!-- /.menu-title -->
+
+                    <li>
+                        <a href="{{ url_for('convert') }}"> <i class="menu-icon fa fa-arrows-h"></i>Converter</a>
+                        
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-credit-card"></i>Bank Details</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-eye"></i><a href="{{ url_for('viewdetails') }}">View Details</a></li>
+                            <li><i class="menu-icon ti-eraser"></i><a href="{{ url_for('changedetails') }}">Change Details</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+    <!-- Header-->
+        <header id="header" class="header">
+            <div class="header-menu">
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">               
+                        <div class="form-inline">                           
+                        </div>
+                        <div class="dropdown for-notification">
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown for-message">
+                  <div class="dropdown-menu" aria-labelledby="message">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-5">
+        <div class="user-area dropdown float-right">
+            
+            <a href="{{url_for('signout')}}"> <button type="button" class="btn btn-outline-success" ><i class="fa fa-power-off"></i>&nbsp; Sign Out</button></a>
+        </div>
+
+        <div class="language-select dropdown" id="language-select">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
+                <i class="flag-icon flag-icon-in"></i>
+            </a>
+            
+        </div>
+
+    </div>
+</div>
+
+</header><!-- /header -->
+<!-- Header-->
+
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+<div class="jumbo">
+
+
+
+</div><br><br>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-md-8">
+        <div class="feed-box text-center">
+            <section class="card">
+                <div class="card-body">
+
+                    <a href="#">
+                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                    </a>
+                    <h2>{{firstname}} {{lastname}}</h2>
+                    <p>{{ session['email'] }}</p>
+                    <p>Mobile Number:{{ phone }}</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="stat-widget-one">
+                <div class="stat-icon dib"><i class="fa fa-money text-success border-success"></i></div>
+                <div class="stat-content dib">
+                    <div class="stat-text">Balance</div>
+                    <div class="stat-digit count">{{ session['balance'] }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="fa fa-bar-chart-o text-warning border-warning"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Exchange Rate</div>
+                                        <div class="stat-digit count">10</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-one">
+                                    <div class="stat-icon dib"><i class="fa fa-inr text-danger border-danger"></i></div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Net Worth</div>
+                                        <div class="stat-digit count">{{net}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Receipts History</strong>
+                    </div>
+                    <div class="card-body">
+                      <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Received On</th>
+                            <th>Received At</th>
+                            <th>Amount in Coinz</th>
+                            <th>Received From</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          {%for t in rcvd_h%}
+                          <tr>
+                            <td>{{t.date[0:10]}}</td>
+                            <td>{{t.date[11:19]}}</td>
+                            <td>{{t.coinz}}</td>
+                            <td>{{t.sender_email}}</td>
+                          </tr>
+                          {%endfor%}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+</div>
+
+
+{% if not new %}
+
+<div class="col-sm-12" align="middle">
+<div class="card">
+      <div class="card-header">
+        Your current address is <strong>{{ session['hash'] }}</strong>
+    </div>
+<div class="card-body card-block">
+    <p>Ideally, you should change your hash after every transaction</p>
+</div>
+<div class="card-footer">
+    <form action="{{url_for('profile')}}" method="post" class="">
+      <button type="submit" class="btn-outline-success"><b><strong>CHANGE</strong></b></button>
+  </form>
+</div>
+</div>
+
+
+
+
+
+{% else %}
+
+<div class="col-sm-12" align="middle">
+<div class="card">
+      <div class="card-header">
+        Your new address is <strong>{{ session['hash'] }}</strong>
+    </div>
+</div>
+
+{% endif %} 
+
+<!--div class="col-sm-12" align="middle">
+<div class="card">
+      
+<div class="card-body card-block">
+    <b><strong><p>Change password of your account</p></strong></b>
+</div>
+<div class="card-footer">
+    <form action="{{url_for('profile')}}" method="post" class="">
+      <button type="submit" class="btn-outline-success"><b><strong>CHANGE</strong></b></button>
+  </form>
+</div>
+</div-->
+
+<!--total transactions-->
+<script src="{{ url_for('static', filename='assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+
+<script src="{{ url_for('static', filename='assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/widgets.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/lib/vector-map/jquery.vmap.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/lib/vector-map/country/jquery.vmap.world.js') }}"></script>
+<script>
+    ( function ( $ ) {
+        "use strict";
+
+        jQuery( '#vmap' ).vectorMap( {
+            map: 'world_en',
+            backgroundColor: null,
+            color: '#ffffff',
+            hoverOpacity: 0.7,
+            selectedColor: '#1de9b6',
+            enableZoom: true,
+            showTooltip: true,
+            values: sample_data,
+            scaleColors: [ '#1de9b6', '#03a9f5' ],
+            normalizeFunction: 'polynomial'
+        } );
+    } )( jQuery );
+</script>
+
+</body>
+</html>
