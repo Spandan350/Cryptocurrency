@@ -8,7 +8,7 @@ app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_SSL"] = True
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USERNAME"] = 'assistance.blockchain@gmail.com'
-app.config["MAIL_PASSWORD"] = 'blockchain_123456'
+app.config["MAIL_PASSWORD"] = 'secret'
 app.config['MAIL_DEFAULT_SENDER'] = 'assistance.blockchain@gmail.com'
 app.config["SECURITY_PASSWORD_SALT"]= 'my_precious_two'
 
